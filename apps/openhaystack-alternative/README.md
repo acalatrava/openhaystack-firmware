@@ -13,3 +13,17 @@ By default it will compile for nRF52 platform. If you want to make a firmware fo
 ```
 NRF_MODEL=nrf51 make
 ```
+
+Please keep in mind that, by default, the resulting binaries on `_build` will not include the Softdevice. You can generate a full binary by issuing
+
+```
+make build
+```
+or
+```
+NRF_MODEL=nrf51 make build
+```
+
+this command will create a full binary to be flashed on the `compiled` directory.
+
+A compiled binary for both platforms is included for convenience.
