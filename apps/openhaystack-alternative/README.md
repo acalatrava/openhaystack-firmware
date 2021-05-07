@@ -1,0 +1,15 @@
+OpenHaystack alternative firmware
+=================================
+
+This is an alternative firmware to https://github.com/seemoo-lab/openhaystack/tree/main/Firmware/Microbit_v1/offline-finding but using the Softdevice from Nordic Semiconductors.
+
+It is using SDK 11 which uses the Softdevice S130/S132 v2.0.0 that is compatible with both nRF51 and nRF52 platforms. It has been tested with the following modules:
+
+ - E104-BT5032A board from EBYTE which can be purchased here https://www.aliexpress.com/item/4000538644215.html
+ - "AliExpress beacon" which can be purchased here https://www.aliexpress.com/item/32826502025.html
+
+By default it will compile for nRF52 platform. If you want to make a firmware for nRF51822 you can add the `NRF_MODEL` environment variable like this
+
+```
+NRF_MODEL=nrf51 make
+```

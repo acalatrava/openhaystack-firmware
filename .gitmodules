@@ -1,0 +1,3 @@
+[submodule "nrf5x-base"]
+	path = nrf5x-base
+	url = https://github.com/acalatrava/nrf5x-base
