@@ -12,6 +12,8 @@ USE_NRF52 := $(filter nrf52,$(MAKECMDGOALS))
 
 SDK_VERSION = 11
 
+SHELL:=/bin/bash
+
 # BOARD_E104BT5032A is for E104-BT5032A board https://www.aliexpress.com/item/4000538644215.html
 # BOARD_CUSTOM is for this "AliExpress beacon" https://www.aliexpress.com/item/32826502025.html
 
@@ -30,9 +32,16 @@ default: all
 build: clean all
 	mkdir -p compiled
 ifeq ($(NRF_MODEL), nrf51)
-	mergehex -m ../../nrf5x-base/sdk/nrf51_sdk_11.0.0/components/softdevice/s130/hex/s130_nrf51_2.0.0_softdevice.hex _build/openhaystack-alternative_s130.hex -o compiled/nrf51_firmware.bin
+	mergehex -m ../../nrf5x-base/sdk/nrf51_sdk_11.0.0/components/softdevice/s130/hex/s130_nrf51_2.0.0_softdevice.hex _build/openhaystack-alternative_s130.hex -o compiled/$(NRF_MODEL)_firmware.hex
 else
-	mergehex -m ../../nrf5x-base/sdk/nrf51_sdk_11.0.0/components/softdevice/s132/hex/s132_nrf52_2.0.0_softdevice.hex _build/openhaystack-alternative_s132.hex -o compiled/nrf52_firmware.bin
+	mergehex -m ../../nrf5x-base/sdk/nrf51_sdk_11.0.0/components/softdevice/s132/hex/s132_nrf52_2.0.0_softdevice.hex _build/openhaystack-alternative_s132.hex -o compiled/$(NRF_MODEL)_firmware.hex
+endif
+ifneq (, $(shell which objcopy))
+	objcopy --input-target=ihex --output-target=binary compiled/$(NRF_MODEL)_firmware.hex compiled/$(NRF_MODEL)_firmware.bin
+else ifneq (, $(shell which hex2bin.py))
+	hex2bin.py compiled/$(NRF_MODEL)_firmware.hex compiled/$(NRF_MODEL)_firmware.bin
+else
+	$(error Unable to find objcopy or hex2bin.py. Please install binutils or hex2bin to generate a compiled binary.)
 endif
 
 

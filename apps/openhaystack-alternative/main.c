@@ -37,7 +37,6 @@ int main(void) {
 
     // Go to low power mode
     while (1) {
-        uint32_t err_code = sd_app_evt_wait();
-        APP_ERROR_CHECK(err_code);
+        power_manage();
     }
 }

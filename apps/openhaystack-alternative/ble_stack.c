@@ -22,7 +22,7 @@ void init_ble() {
     err_code = softdevice_enable_get_default_config(CENTRAL_LINK_COUNT, // central link count
                                                     PERIPHERAL_LINK_COUNT, // peripheral link count
                                                     &ble_enable_params);
-    ble_enable_params.common_enable_params.vs_uuid_count = BLE_UUID_VS_COUNT_DEFAULT;
+    ble_enable_params.common_enable_params.vs_uuid_count = BLE_UUID_VS_COUNT_MIN;
     APP_ERROR_CHECK(err_code);
 
     //Check the ram settings against the used number of links
@@ -49,12 +49,14 @@ void setMacAddress(uint8_t *addr) {
     APP_ERROR_CHECK(err_code);
 }
 
-
 /**
  * setAdvertisementData will set the data to be advertised
  */
 void setAdvertisementData(uint8_t *data, uint8_t dlen) {
-    sd_ble_gap_adv_data_set(data, dlen, NULL, 0);
+    uint32_t err_code;
+
+    err_code = sd_ble_gap_adv_data_set(data, dlen, NULL, 0);
+    APP_ERROR_CHECK(err_code);
 }
 
 /**
@@ -71,4 +73,13 @@ void startAdvertisement(int interval) {
     m_adv_params.interval    = MSEC_TO_UNITS(interval, UNIT_0_625_MS);
     m_adv_params.timeout     = 0;
     sd_ble_gap_adv_start(&m_adv_params);
+}
+
+/**
+ * Function for the Power manager.
+ */
+void power_manage(void)
+{
+    uint32_t err_code = sd_app_evt_wait();
+    APP_ERROR_CHECK(err_code);
 }

@@ -33,3 +33,8 @@ void setAdvertisementData(uint8_t *data, uint8_t dlen);
  * @param[in] interval advertising interval in milliseconds
  */
 void startAdvertisement(int interval);
+
+/**
+ * Function for the Power manager.
+ */
+void power_manage(void);
