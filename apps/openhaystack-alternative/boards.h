@@ -48,6 +48,8 @@
   #include "e104bt5032a_board.h"
 #elif defined(BOARD_CUSTOM)
   #include "custom_board.h"
+#elif defined(BOARD_SIMPLE)
+  #include "simple_board.h"
 #else
 #error "Board is not defined"
 

@@ -14,16 +14,17 @@ SDK_VERSION = 11
 
 SHELL:=/bin/bash
 
+# BOARD_SIMPLE is the default board with no external crystal to maximize compatibility
 # BOARD_E104BT5032A is for E104-BT5032A board https://www.aliexpress.com/item/4000538644215.html
-# BOARD_CUSTOM is for this "AliExpress beacon" https://www.aliexpress.com/item/32826502025.html
+# BOARD_ALIEXPRESS is for this "AliExpress beacon" https://www.aliexpress.com/item/32826502025.html
 
 # Compile for nrf52 by default, use "NRF_MODEL=nrf51 make" to compile for nrf51 platform
 ifeq ($(NRF_MODEL), nrf51)
 SOFTDEVICE_MODEL = s130
-BOARD ?= BOARD_CUSTOM
+BOARD ?= BOARD_SIMPLE
 else
 SOFTDEVICE_MODEL = s132
-BOARD ?= BOARD_E104BT5032A
+BOARD ?= BOARD_SIMPLE
 NRF_MODEL = nrf52
 endif
 

@@ -9,38 +9,33 @@
  * the file.
  *
  */
-#ifndef CUSTOM_BOARD_H
-#define CUSTOM_BOARD_H
+#ifndef SIMPLE_BOARD_H
+#define SIMPLE_BOARD_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#define NRF_CLOCK_LFCLKSRC {.source        = NRF_CLOCK_LF_SRC_RC,            \
+                            .rc_ctiv       = 16,                             \
+                            .rc_temp_ctiv  = 2,                              \
+                            .xtal_accuracy = 1}
+
 // LEDs definitions
-#define LEDS_NUMBER    1
-
-#define LED_1          29
-
+#define LEDS_NUMBER    0
 #define LEDS_ACTIVE_STATE 0
 
-#define LEDS_LIST { LED_1}
-
-#define BSP_LED_0      LED_1
+#define LEDS_LIST { }
 
 #define LEDS_INV_MASK  0
 
-#define BUTTONS_NUMBER 1
+#define BUTTONS_NUMBER 0
 
-#define BUTTON_START   28
-#define BUTTON_1       28
-#define BUTTON_STOP    28
-#define BUTTON_PULL    NRF_GPIO_PIN_PULLUP
+#define BUTTON_PULL    NRF_GPIO_PIN_PULLDOWN
 
 #define BUTTONS_ACTIVE_STATE 0
 
-#define BUTTONS_LIST { BUTTON_1 }
-
-#define BSP_BUTTON_0   BUTTON_1
+#define BUTTONS_LIST { }
 
 #define RX_PIN_NUMBER  11
 #define TX_PIN_NUMBER  12
@@ -74,12 +69,6 @@ extern "C" {
 #define ARDUINO_A3_PIN              29    // Analog channel 3
 #define ARDUINO_A4_PIN              30    // Analog channel 4
 #define ARDUINO_A5_PIN              31    // Analog channel 5
-
-// Low frequency clock source to be used by the SoftDevice
-#define NRF_CLOCK_LFCLKSRC      {.source        = NRF_CLOCK_LF_SRC_XTAL,            \
-                                 .rc_ctiv       = 0,                                \
-                                 .rc_temp_ctiv  = 0,                                \
-                                 .xtal_accuracy = NRF_CLOCK_LF_XTAL_ACCURACY_20_PPM}
 
 
 #ifdef __cplusplus
