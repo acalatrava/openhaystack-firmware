@@ -38,10 +38,12 @@ else
 endif
 ifneq (, $(shell which objcopy))
 	objcopy --input-target=ihex --output-target=binary compiled/$(NRF_MODEL)_firmware.hex compiled/$(NRF_MODEL)_firmware.bin
+else ifneq (, $(shell which gobjcopy))
+	gobjcopy --input-target=ihex --output-target=binary compiled/$(NRF_MODEL)_firmware.hex compiled/$(NRF_MODEL)_firmware.bin
 else ifneq (, $(shell which hex2bin.py))
 	hex2bin.py compiled/$(NRF_MODEL)_firmware.hex compiled/$(NRF_MODEL)_firmware.bin
 else
-	$(error Unable to find objcopy or hex2bin.py. Please install binutils or hex2bin to generate a compiled binary.)
+	$(error Unable to find \(g\)objcopy or hex2bin.py. Please install binutils or hex2bin.py to generate a compiled binary.)
 endif
 
 
