@@ -46,8 +46,8 @@
   #include "arduino_primo.h"
 #elif defined(BOARD_E104BT5032A)
   #include "e104bt5032a_board.h"
-#elif defined(BOARD_CUSTOM)
-  #include "custom_board.h"
+#elif defined(BOARD_ALIEXPRESS)
+  #include "aliexpress_board.h"
 #elif defined(BOARD_SIMPLE)
   #include "simple_board.h"
 #else
