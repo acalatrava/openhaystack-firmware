@@ -27,3 +27,12 @@ NRF_MODEL=nrf51 make build
 this command will create a full binary to be flashed on the `compiled` directory.
 
 A compiled binary for both platforms is included for convenience.
+
+In case you can't or don't want to build the firmware,
+you can just patch existing firmware with your advertisement key from OpenHaystack app:
+
+```
+NRF_MODEL=nrf51 BOARD=BOARD_ALIEXPRESS ADV_KEY_BASE64=YOUR_ADVERTISEMENT_KEY make patch
+```
+
+this command will create the new patched binary (`nrf51_firmware_patched.bin`) with provided key on the `compiled` directory.
