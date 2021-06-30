@@ -12,13 +12,13 @@ git submodule update
 
 ### Install required dependencies
  - nRF command line tools
- https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Command-Line-Tools/Download
+ `brew tap homebrew/cask-drivers; brew install --cask nordic-nrf-command-line-tools`
 
  - binutils
  `brew install binutils`
 
  - gcc-arm-none-eabi
- `brew cask install gcc-arm-embedded`
+ `brew install --cask gcc-arm-embedded`
 
 ### Compile the firmware
 Follow instructions on the `apps` folder
