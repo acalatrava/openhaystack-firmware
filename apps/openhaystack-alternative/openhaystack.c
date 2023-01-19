@@ -55,7 +55,7 @@ uint8_t setAdvertisementKey(char *key, uint8_t **bleAddr, uint8_t **data) {
     set_addr_from_key(key);
 	fill_adv_template_from_key(key);
 
-    *bleAddr = malloc(sizeof(key));
+    *bleAddr = malloc(sizeof(addr));
     memcpy(*bleAddr, addr, sizeof(addr));
 
     *data = malloc(sizeof(offline_finding_adv_template));
