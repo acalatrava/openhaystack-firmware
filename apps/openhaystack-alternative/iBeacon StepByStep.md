@@ -1,31 +1,35 @@
-All tools and software used: 
-iBeacons NRF51822: https://aliexpress.com/item/32917064741.html
-Batteries CR2477: https://aliexpress.com/item/1005004906609217.html 
-Programmer: ST-LINK V2: https://aliexpress.com/item/1005003575620794.html
-OpenOCD v20231002 https://gnutoolchains.com/arm-eabi/openocd/
-Drivers for ST-LINK for Win10 are inside openocd: openocd-20231002\OpenOCD-20231002-0.12.0\drivers\ST-Link
-Firmware Upgrade for ST-Link: STSW-LINK007 https://www.st.com/en/development-tools/stsw-link007.html 
-MacOS
-Windows 10
-===========================================================================================================
+# All tools and software used: 
+* iBeacons NRF51822: https://aliexpress.com/item/32917064741.html
+* Batteries CR2477: https://aliexpress.com/item/1005004906609217.html 
+* Programmer: ST-LINK V2: https://aliexpress.com/item/1005003575620794.html
+* OpenOCD v20231002 https://gnutoolchains.com/arm-eabi/openocd/
+* Drivers for ST-LINK for Win10 are inside openocd: openocd-20231002\OpenOCD-20231002-0.12.0\drivers\ST-Link
+* Firmware Upgrade for ST-Link: STSW-LINK007 https://www.st.com/en/development-tools/stsw-link007.html 
+* MacOS
+* Windows 10
+
 
 Firmware iBeacon: https://github.com/acalatrava/openhaystack-firmware
 With preexisting files from apps/openhaystack-alternative/compiled 
 
+## Soldering
 Solder wires according to layout and attach to ST-LINK accordingly
 SWDCLK, SWDIO, GND, VDD(=3.3 V) - use only one GND - I used the bottom one.
-![Board layout](/layout.jpg)
+![Board layout](/apps/openhaystack-alternative/layout.jpg)
 
+## Generate Advertisement Key
 In Openhaystack:
 Create New Device
 Copy Advertisement Key->Base64
 
+## Creating patched firmware
 In Terminal in MacOS:
 ```
 NRF_MODEL=nrf51 ADV_KEY_BASE64=[YOUR_ADVERTISEMENT_KEY] make patch
 ```
 This creates "nrf51_firmware_patched.bin" in /compiled folder
 
+## Flashing Device
 Copy "nrf51_firmware_patched.bin" to a Win10 machine (obviously optional but I coouldn't make it work on MacOS somehow, maybe ST-LINK is not compatible)
 into the OpenOCD-Folder.
 
