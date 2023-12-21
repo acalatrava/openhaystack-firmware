@@ -5,36 +5,41 @@
 * OpenOCD v20231002 https://gnutoolchains.com/arm-eabi/openocd/
 * Drivers for ST-LINK for Win10 are inside openocd: openocd-20231002\OpenOCD-20231002-0.12.0\drivers\ST-Link
 * Firmware Upgrade for ST-Link: STSW-LINK007 https://www.st.com/en/development-tools/stsw-link007.html 
-* MacOS
+* macOS 11.7.10 BigSur with [OpenHaystack](https://github.com/seemoo-lab/openhaystack)
 * Windows 10
-
 
 Firmware iBeacon: https://github.com/acalatrava/openhaystack-firmware
 With preexisting files from apps/openhaystack-alternative/compiled 
 
+## Software
+1. Install Drivers for ST-Link from OpenOCD directory
+2. Upgrade Firmware for ST-Link
+3. Install OpenHaystack on macOS machine
+
 ## Soldering
-Solder wires according to layout and attach to ST-LINK accordingly
-SWDCLK, SWDIO, GND, VDD(=3.3 V) - use only one GND - I used the bottom one.
+Solder wires according to layout and attach to ST-LINK accordingly  
+SWDCLK, SWDIO, GND, VDD(=3.3 V) - use only one GND - I used the bottom one.  
 ![Board layout](/apps/openhaystack-alternative/layout.jpg)
 
 ## Generate Advertisement Key
-In Openhaystack:
-Create New Device
+In Openhaystack:  
+Create New Device  
 Copy Advertisement Key->Base64
 
 ## Creating patched firmware
-In Terminal in MacOS:
+In Terminal in MacOS navigate into /apps/openhaystack-alternative and type:
 ```
 NRF_MODEL=nrf51 ADV_KEY_BASE64=[YOUR_ADVERTISEMENT_KEY] make patch
 ```
 This creates "nrf51_firmware_patched.bin" in /compiled folder
 
 ## Flashing Device
-Copy "nrf51_firmware_patched.bin" to a Win10 machine (obviously optional but I coouldn't make it work on MacOS somehow, maybe ST-LINK is not compatible)
+Copy "nrf51_firmware_patched.bin" to a Win10 machine  
+(This step is obviously optional but I coouldn't make it work on macOS somehow, maybe ST-LINK is not compatible)
 into the OpenOCD-Folder.
 
 In cmd Windows 10:
-Navigate into the folder and enter:
+Navigate into OPenOCD folder (the one that contains folders bin, drivers, share) and type:
 ```
 bin\openocd.exe -f share\openocd\scripts\interface\stlink.cfg -f share\openocd\scripts\target\nrf51.cfg -c "init; halt; nrf51 mass_erase; program nrf51_firmware_patched.bin; reset; exit;"
 ```
@@ -67,7 +72,7 @@ xPSR: 0xc1000000 pc: 0xfffffffe msp: 0xfffffffc
 Warn : Adding extra erase range, 0x0001cc70 .. 0x0001cfff
 ** Programming Finished **
 ```
-In Openhaystack:
-Mark Device as deployed
+In OpenHaystack:  
+Mark Device as deployed  
 
 Unsolder Wires, insert Battery and you are done.
